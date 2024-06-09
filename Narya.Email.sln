@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narya.Email.Core", "Narya.Email.Core\Narya.Email.Core.csproj", "{72C5DB5F-02BA-4926-AE4A-80E6210944A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narya.Email.Smtp", "Narya.Email.Smtp\Narya.Email.Smtp.csproj", "{7A54CD0E-F452-4646-9073-F059378699E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSuite", "TestSuite\TestSuite.csproj", "{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72C5DB5F-02BA-4926-AE4A-80E6210944A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72C5DB5F-02BA-4926-AE4A-80E6210944A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72C5DB5F-02BA-4926-AE4A-80E6210944A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72C5DB5F-02BA-4926-AE4A-80E6210944A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A54CD0E-F452-4646-9073-F059378699E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A54CD0E-F452-4646-9073-F059378699E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A54CD0E-F452-4646-9073-F059378699E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A54CD0E-F452-4646-9073-F059378699E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
