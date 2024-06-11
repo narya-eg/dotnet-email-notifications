@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Narya.Email.Core.Interfaces;
-using Narya.Email.Smtp.Extensions;
-using Narya.Email.Smtp.Interfaces;
 using Narya.Email.Smtp.Services;
 
 namespace Narya.Email.Smtp;

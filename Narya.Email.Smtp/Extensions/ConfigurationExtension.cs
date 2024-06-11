@@ -14,7 +14,7 @@ public static class ConfigurationExtension
     }
 }
 
-public class SmtpConfig : ProviderConfig
+public class SmtpConfig
 {
     public string? Server { get; set; }
     public string? Username { get; set; }

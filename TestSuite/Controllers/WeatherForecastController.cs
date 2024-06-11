@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Narya.Email.Core.Interfaces;
 using Narya.Email.Core.Models;
-using Narya.Email.Smtp.Interfaces;
 
 namespace TestSuite.Controllers;
 
@@ -15,13 +14,12 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
-    private readonly ISmtpEmailService _smtpEmailService;
     private readonly IEmailService _emailService;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, ISmtpEmailService smtpEmailService)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IEmailService emailService)
     {
         _logger = logger;
-        _smtpEmailService = smtpEmailService;
+        _emailService = emailService;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
@@ -38,11 +36,8 @@ public class WeatherForecastController : ControllerBase
 
     public IActionResult SendUsingSmtp([FromBody] EmailOptions options)
     {
-        _smtpEmailService.Send(options);
-        _smtpEmailService.Send(options, new Narya.Email.Smtp.Extensions.SmtpConfig
-        {
+        _emailService.Send(options);
 
-        });
         return Ok();
     }
 }
