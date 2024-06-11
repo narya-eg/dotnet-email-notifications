@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
@@ -27,9 +27,9 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" PrivateAssets="compile" />
 		<PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" PrivateAssets="compile" />
 	</ItemGroup>
-	
-    <ItemGroup>
-      <ProjectReference Include="..\Narya.Email.Core\Narya.Email.Core.csproj" />
-    </ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Narya.Email.Core\Narya.Email.Core.csproj" />
+	</ItemGroup>
 
 </Project>

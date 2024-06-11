@@ -1,4 +1,5 @@
 using Narya.Email.Smtp;
+using Narya.Email.Sendgrid;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddEmailUsingSmtp();
+builder.Services.AddEmailUsingSendgrid();
 
 var app = builder.Build();
 

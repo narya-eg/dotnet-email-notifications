@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Narya.Email.Core.Interfaces;
 using Narya.Email.Core.Models;
-using Narya.Email.Smtp.Extensions;
-using Narya.Email.Smtp.Helpers;
+using Narya.Email.Sendgrid.Extensions;
+using Narya.Email.Sendgrid.Helpers;
 using System.Net;
 using System.Net.Mail;
 
-namespace Narya.Email.Smtp.Services;
+namespace Narya.Email.Sendgrid.Services;
 
 public class EmailService : IEmailService
 {

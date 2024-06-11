@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Narya.Email.Sendgrid\Narya.Email.Sendgrid.csproj" />
       <ProjectReference Include="..\Narya.Email.Smtp\Narya.Email.Smtp.csproj" />
     </ItemGroup>
 

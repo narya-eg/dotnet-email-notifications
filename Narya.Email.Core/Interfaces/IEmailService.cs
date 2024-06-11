@@ -16,7 +16,6 @@ public interface IEmailService
     /// </summary>
     /// <param name="options"></param>
     /// <param name="configuration"></param>
-    /// <typeparam name="TProviderConfig"></typeparam>
     /// <returns></returns>
     Task Send(EmailOptions options, dynamic configuration);
 }

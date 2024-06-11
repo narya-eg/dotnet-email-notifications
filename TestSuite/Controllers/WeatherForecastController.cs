@@ -5,7 +5,7 @@ using Narya.Email.Core.Models;
 namespace TestSuite.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/[action]")]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -14,15 +14,17 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
-    private readonly IEmailService _emailService;
+    private readonly IEmailService _smtpService;
+    private readonly IEmailService _sendgridService;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, IEmailService emailService)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, IEmailProvider emailProvider)
     {
         _logger = logger;
-        _emailService = emailService;
+        _smtpService = emailProvider.GetProvider(Narya.Email.Core.Enums.EmailProvidersEnum.Smtp);
+        _sendgridService = emailProvider.GetProvider(Narya.Email.Core.Enums.EmailProvidersEnum.SendGrid);
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
+    [HttpGet("GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -34,9 +36,18 @@ public class WeatherForecastController : ControllerBase
             .ToArray();
     }
 
+    [HttpPost("smtp")]
     public IActionResult SendUsingSmtp([FromBody] EmailOptions options)
     {
-        _emailService.Send(options);
+        _smtpService.Send(options);
+
+        return Ok();
+    }
+
+    [HttpPost("sendgrid")]
+    public IActionResult SendUsingSendgrid([FromBody] EmailOptions options)
+    {
+        _sendgridService.Send(options);
 
         return Ok();
     }
