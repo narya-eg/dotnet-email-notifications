@@ -2,17 +2,17 @@
 using Narya.Email.Core.Extensions;
 using Narya.Email.Core.Interfaces;
 using Narya.Email.Core.Models;
+using Narya.Email.Sendgrid.Exceptions;
 using Narya.Email.Sendgrid.Extensions;
-using Narya.Email.Sendgrid.Helpers;
-using System.Net;
-using System.Net.Mail;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace Narya.Email.Sendgrid.Services;
 
 public class EmailService : IEmailService
 {
     private readonly IConfiguration _configuration;
-    private SmtpConfig _smtpConfig = new();
+    private SendGridConfig _sendGridConfig = new();
 
     public EmailService(IConfiguration configuration)
     {
@@ -21,45 +21,44 @@ public class EmailService : IEmailService
 
     public async Task Send(EmailOptions options)
     {
-        _smtpConfig = _configuration.GetSmtpConfig();
+        _sendGridConfig = _configuration.GetSendGridConfig();
         await SendEmail(options);
     }
     public async Task Send(EmailOptions options, dynamic configuration)
     {
-        if (configuration is not object) throw new Exception("SMTP configuration is not a valid configurations.");
-        _smtpConfig = ModelExtension.ConvertTo<SmtpConfig>(configuration);
+        if (configuration is not object) throw new Exception("SendGrid configuration is not a valid configurations.");
+        _sendGridConfig = ModelExtension.ConvertTo<SendGridConfig>(configuration);
         await SendEmail(options);
     }
-
-    #region Helpers
     private async Task SendEmail(EmailOptions options)
     {
-        var mail = new MailMessage();
-        mail.From = new MailAddress(_smtpConfig.From?.Email!);
-        mail.Sender = new MailAddress(_smtpConfig.From?.Email!);
-        mail.Subject = options.Subject;
-        mail.Body = options.Body;
-        mail.IsBodyHtml = options.IsBodyHtml;
-        foreach (var item in options.To) mail.To.Add(item.Email);
+        var client = new SendGridClient(_sendGridConfig.ApiKey);
+        var from = new EmailAddress(_sendGridConfig.From?.Email, _sendGridConfig.From?.Name);
 
-        if (options.CC.Any())
-            foreach (var item in options.CC)
-                mail.CC.Add(item.Email);
+        // Multiple
+        var to = options.To.Select(x => new EmailAddress(x.Email, x.Name)).ToList();
+        var cc = options.CC.Select(x => new EmailAddress(x.Email, x.Name)).Where(c => !to.Contains(c)).ToList();
+        var bcc = options.BCC.Select(x => new EmailAddress(x.Email, x.Name)).Where(c => !to.Contains(c)).ToList();
+        var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, to, options.Subject,
+            options.PlainTextContent, options.HtmlContent);
 
-        if (options.BCC.Any())
-            foreach (var item in options.BCC)
-                mail.Bcc.Add(item.Email);
+        if (cc.Any())
+            msg.AddCcs(cc);
+
+        if (bcc.Any())
+            msg.AddBccs(bcc);
 
         if (options.Attachments.Any())
             foreach (var item in options.Attachments)
-                mail.Attachments.Add(item.ToAttachment());
+            {
+                using var ms = new MemoryStream();
+                await item.CopyToAsync(ms);
+                var fileBytes = ms.ToArray();
+                var file = Convert.ToBase64String(fileBytes);
+                msg.AddAttachment(item.FileName, file);
+            }
 
-        var smtpClient = new SmtpClient(_smtpConfig.Server, _smtpConfig.Port);
-        smtpClient.EnableSsl = _smtpConfig.EnableSsl;
-        if (!string.IsNullOrEmpty(_smtpConfig.Password))
-            smtpClient.Credentials = new NetworkCredential(_smtpConfig.Username, _smtpConfig.Password);
-        await smtpClient.SendMailAsync(mail);
+        var response = await client.SendEmailAsync(msg);
+        await SendGridException.ThrowExceptionOnError(response);
     }
-
-    #endregion
 }
