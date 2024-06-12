@@ -1,10 +1,10 @@
-name: Publish NuGet Package
+name: Narya.Smtp
 
 on:
-  push: 
-     branches: [release]
-  pull_request:
-     branches: [release]
+  workflow_run:
+    workflows: ["Narya.Core"]
+    types:
+      - completed
 
 jobs:
   publish:
@@ -18,16 +18,16 @@ jobs:
         uses: actions/setup-dotnet@v3
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ./Narya.Email.Smtp/
 
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build ./Narya.Email.Smtp/ --no-restore --configuration Release
 
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test ./Narya.Email.Smtp/ --no-restore --verbosity normal
 
       - name: Pack NuGet package
-        run: dotnet pack --no-build --no-restore --configuration Release
+        run: dotnet pack ./Narya.Email.Smtp/ --no-build --no-restore --configuration Release --output core
 
 
       - name: Get package version

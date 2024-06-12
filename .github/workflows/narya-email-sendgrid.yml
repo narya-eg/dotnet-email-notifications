@@ -1,0 +1,51 @@
+name: Narya.SendGrid
+
+on:
+  workflow_run:
+    workflows: ["Narya.Core"]
+    types:
+      - completed
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+
+      - name: Restore dependencies
+        run: dotnet restore ./Narya.Email.Sendgrid/
+
+      - name: Build
+        run: dotnet build ./Narya.Email.Sendgrid/ --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test ./Narya.Email.Sendgrid/ --no-restore --verbosity normal
+
+      - name: Pack NuGet package
+        run: dotnet pack ./Narya.Email.Sendgrid/ --no-build --no-restore --configuration Release --output sendgrid
+
+
+      - name: Get package version
+        id: get_version
+        run: echo "##[set-output name=VERSION;]$(cat **/*.csproj | grep '<Version>' | sed -E 's/.*<Version>(.+)<\/Version>.*/\1/')"
+
+      - name: Publish NuGet package
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_PAT }}
+        run: dotnet nuget push "$PACKAGE" -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+      
+      - name: Create GitHub Tag
+        id: create_tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+          tag: ${{ steps.get_version.outputs.VERSION }}
+        run: |
+          gh release create "$tag" \
+              --repo="$GITHUB_REPOSITORY" \
+              --title="${tag#v}" \
+              --generate-notes
