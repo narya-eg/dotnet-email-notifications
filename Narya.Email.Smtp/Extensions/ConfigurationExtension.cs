@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Narya.Email.Core.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Narya.Email.Smtp.Extensions;
 
@@ -16,18 +17,22 @@ public static class ConfigurationExtension
 
 public class SmtpConfig: IProviderConfig
 {
+    [Required]
     public string? Server { get; set; }
+    [Required]
+    [StringLength(100)]
     public string? Username { get; set; }
+    [Required]
+    [StringLength(100)]
     public string? Password { get; set; }
+    [Required]
     public int Port { get; set; }
+    [Required]
     public bool EnableSsl { get; set; }
     public bool IgnoreCertificateErrors { get; set; }
     public SmtpFromConfig? From { get; set; }
 
-    public bool RequiredProperty(string name)
-    {
-        return new string[] { "Server", "Username", "Password", "Port", "EnableSsl" }.Contains(name);
-    }
+    public bool ValidateProperty(object instance, string propertyName, object? value) => Validator.TryValidateProperty(value, new ValidationContext(instance) { MemberName = propertyName }, new List<ValidationResult>());
 }
 
 public class SmtpFromConfig

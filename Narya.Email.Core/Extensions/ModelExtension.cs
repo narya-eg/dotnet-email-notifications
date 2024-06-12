@@ -13,27 +13,17 @@ namespace Narya.Email.Core.Extensions
             foreach (var property in configType.GetProperties())
             {
                 var modelProperty = model.GetType().GetProperty(property.Name);
-                if (modelProperty != null)
-                {
-                    var value = modelProperty.GetValue(model);
-                    if (value != null && property.PropertyType.IsAssignableFrom(modelProperty.PropertyType))
-                        property.SetValue(config, value);
-                    else
-                        SetDefault(config, property);
-                }
-                else
-                    SetDefault(config, property);
+                if (modelProperty is not null) SetValue(config, property, modelProperty.GetValue(model));
+                else SetValue(config, property, null);
             }
 
             return config;
         }
 
-        private static void SetDefault<T>(T config, PropertyInfo property) where T : class, IProviderConfig, new()
+        private static void SetValue<T>(T config, PropertyInfo property, object? value) where T : class, IProviderConfig, new()
         {
-            if (config.RequiredProperty(property.Name))
-                throw new ArgumentException($"Missing '{property.Name}' from 'Smtp Configurations'.");
-            else
-                property.SetValue(config, property.PropertyType.IsValueType ? Activator.CreateInstance(property.PropertyType) : null);
+            if (config.ValidateProperty(config, property.Name, value) is false) throw new ArgumentException($"Invalid '{property.Name}' in 'Smtp Configurations'.");
+            property.SetValue(config, value is not null ? value : property.PropertyType.IsValueType ? Activator.CreateInstance(property.PropertyType) : null);
         }
     }
 }

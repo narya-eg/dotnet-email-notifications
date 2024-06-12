@@ -2,6 +2,6 @@
 {
     public interface IProviderConfig
     {
-        public bool RequiredProperty(string name);
+        public bool ValidateProperty(object instance, string propertyName, object? value);
     }
 }
