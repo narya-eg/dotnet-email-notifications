@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Narya.Email.Core.Extensions;
 using Narya.Email.Core.Interfaces;
 using Narya.Email.Core.Models;
 using Narya.Email.Sendgrid.Extensions;
@@ -25,8 +26,8 @@ public class EmailService : IEmailService
     }
     public async Task Send(EmailOptions options, dynamic configuration)
     {
-        //if (configuration is not SmtpConfig) throw new Exception("SMTP configuration is not a valid configurations."); // TODO: should accept annonamouys object
-        _smtpConfig = configuration;
+        if (configuration is not object) throw new Exception("SMTP configuration is not a valid configurations.");
+        _smtpConfig = ModelExtension.ConvertTo<SmtpConfig>(configuration);
         await SendEmail(options);
     }
 

@@ -14,7 +14,7 @@ public static class ConfigurationExtension
     }
 }
 
-public class SmtpConfig
+public class SmtpConfig : IProviderConfig
 {
     public string? Server { get; set; }
     public string? Username { get; set; }
@@ -23,6 +23,11 @@ public class SmtpConfig
     public bool EnableSsl { get; set; }
     public bool IgnoreCertificateErrors { get; set; }
     public SmtpFromConfig? From { get; set; }
+
+    public bool RequiredProperty(string name)
+    {
+        return new string[] { "Server", "Username", "Password", "Port", "EnableSsl" }.Contains(name);
+    }
 }
 
 public class SmtpFromConfig
