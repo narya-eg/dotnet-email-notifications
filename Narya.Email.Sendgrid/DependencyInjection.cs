@@ -15,7 +15,6 @@ public static class DependencyInjection
         {
             var emailProvider = new EmailProvider();
 
-            // Add providers to the EmailProvider instance
             emailProvider.AddProvider(EmailProvidersEnum.SendGrid, provider.GetRequiredService<EmailService>());
 
             return emailProvider;
