@@ -1,9 +1,7 @@
-﻿using Narya.Email.Core.Enums;
-
-namespace Narya.Email.Core.Interfaces;
+﻿namespace Narya.Email.Core.Interfaces;
 
 public interface IEmailProvider
 {
-    IEmailService GetProvider(EmailProvidersEnum provider);
-    void AddProvider(EmailProvidersEnum provider, IEmailService busControl);
+    IEmailService GetProvider(string provider);
+    void AddProvider(string provider, IEmailService busControl);
 }

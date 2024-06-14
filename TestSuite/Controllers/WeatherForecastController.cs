@@ -20,8 +20,8 @@ public class WeatherForecastController : ControllerBase
     public WeatherForecastController(ILogger<WeatherForecastController> logger, IEmailProvider emailProvider)
     {
         _logger = logger;
-        _smtpService = emailProvider.GetProvider(Narya.Email.Core.Enums.EmailProvidersEnum.Smtp);
-        _sendgridService = emailProvider.GetProvider(Narya.Email.Core.Enums.EmailProvidersEnum.SendGrid);
+        _smtpService = emailProvider.GetProvider("Smtp");
+        _sendgridService = emailProvider.GetProvider("SendGrid");
     }
 
     [HttpGet("GetWeatherForecast")]

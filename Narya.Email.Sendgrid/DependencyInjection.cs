@@ -1,27 +1,26 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Narya.Email.Core.Enums;
 using Narya.Email.Core.Interfaces;
 using Narya.Email.Sendgrid.Services;
+using Narya.Email.Core;
 
 namespace Narya.Email.Sendgrid;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddEmailUsingSendgrid(this IServiceCollection services)
+    //public static IServiceCollection AddSendGrid(this IServiceCollection services)
+    //{
+    //    services.AddSingleton<EmailService>();
+
+    //    services.AddSingleton<IEmailService, EmailService>();
+
+    //    return services;
+    //}
+
+    public static IServiceCollection AddSendGridProvider(this IServiceCollection services, IServiceProvider serviceProvider)
     {
-        services.AddSingleton<EmailService>();
-
-        services.AddSingleton<IEmailProvider>(provider =>
-        {
-            var emailProvider = new EmailProvider();
-
-            emailProvider.AddProvider(EmailProvidersEnum.SendGrid, provider.GetRequiredService<EmailService>());
-
-            return emailProvider;
-        });
-
         services.AddSingleton<IEmailService, EmailService>();
-
+        services.AddSingleton<EmailService>();
+        serviceProvider.AddEmailProvider("SendGrid", serviceProvider.GetRequiredService<EmailService>());
         return services;
     }
 }

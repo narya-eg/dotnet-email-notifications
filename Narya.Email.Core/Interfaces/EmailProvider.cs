@@ -1,17 +1,22 @@
-﻿using Narya.Email.Core.Enums;
-
-namespace Narya.Email.Core.Interfaces;
+﻿namespace Narya.Email.Core.Interfaces;
 
 public class EmailProvider : IEmailProvider
 {
-    private readonly IDictionary<EmailProvidersEnum, IEmailService> _providers;
+    private readonly IDictionary<string, IEmailService> _providers;
+    private static readonly EmailProvider _instance = new EmailProvider();
 
-    public EmailProvider()
+    private EmailProvider()
     {
-        _providers = new Dictionary<EmailProvidersEnum, IEmailService>();
+        _providers = new Dictionary<string, IEmailService>();
     }
 
-    public IEmailService GetProvider(EmailProvidersEnum provider)
+    // Public static property to provide access to the single instance
+    public static EmailProvider Instance
+    {
+        get { return _instance; }
+    }
+
+    public IEmailService GetProvider(string provider)
     {
         if (_providers.TryGetValue(provider, out var emailService))
         {
@@ -20,7 +25,7 @@ public class EmailProvider : IEmailProvider
         throw new ArgumentException($"Bus with name {provider} not found.");
     }
 
-    public void AddProvider(EmailProvidersEnum provider, IEmailService emailService)
+    public void AddProvider(string provider, IEmailService emailService)
     {
         if (!_providers.ContainsKey(provider))
         {
