@@ -22,10 +22,11 @@ public static class DependencyInjection
     //    return services;
     //}
 
-    public static IServiceCollection AddSmtpProvider(this IServiceCollection services, IServiceProvider serviceProvider)
+    public static IServiceCollection AddSmtpProvider(this IServiceCollection services)
     {
-        services.AddSingleton<IEmailService, EmailService>();
         services.AddSingleton<EmailService>();
+        services.AddSingleton<IEmailService, EmailService>();
+        var serviceProvider = services.BuildServiceProvider();
         serviceProvider.AddEmailProvider("Smtp", serviceProvider.GetRequiredService<EmailService>());
         return services;
     }

@@ -7,19 +7,12 @@ namespace Narya.Email.Sendgrid;
 
 public static class DependencyInjection
 {
-    //public static IServiceCollection AddSendGrid(this IServiceCollection services)
-    //{
-    //    services.AddSingleton<EmailService>();
 
-    //    services.AddSingleton<IEmailService, EmailService>();
-
-    //    return services;
-    //}
-
-    public static IServiceCollection AddSendGridProvider(this IServiceCollection services, IServiceProvider serviceProvider)
+    public static IServiceCollection AddSendGridProvider(this IServiceCollection services)
     {
         services.AddSingleton<IEmailService, EmailService>();
         services.AddSingleton<EmailService>();
+        var serviceProvider = services.BuildServiceProvider();
         serviceProvider.AddEmailProvider("SendGrid", serviceProvider.GetRequiredService<EmailService>());
         return services;
     }
