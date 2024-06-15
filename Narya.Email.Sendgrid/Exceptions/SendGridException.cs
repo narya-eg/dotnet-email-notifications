@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using SendGrid;
 
-namespace Narya.Email.Sendgrid.Exceptions;
+namespace Narya.Email.SendGrid.Exceptions;
 
 [Serializable]
 internal class SendGridException : Exception

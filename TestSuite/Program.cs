@@ -1,5 +1,5 @@
 using Narya.Email.Core;
-using Narya.Email.Sendgrid;
+using Narya.Email.SendGrid;
 using Narya.Email.Smtp;
 
 var builder = WebApplication.CreateBuilder(args);

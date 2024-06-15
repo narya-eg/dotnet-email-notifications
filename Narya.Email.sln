@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narya.Email.Smtp", "Narya.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSuite", "TestSuite\TestSuite.csproj", "{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narya.Email.Sendgrid", "Narya.Email.Sendgrid\Narya.Email.Sendgrid.csproj", "{9DEE43A8-C94A-423E-8794-9430220B9B31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narya.Email.SendGrid", "Narya.Email.Sendgrid\Narya.Email.SendGrid.csproj", "{9DEE43A8-C94A-423E-8794-9430220B9B31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

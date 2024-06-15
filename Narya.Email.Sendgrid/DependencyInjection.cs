@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Narya.Email.Core;
 using Narya.Email.Core.Interfaces;
-using Narya.Email.Sendgrid.Services;
+using Narya.Email.SendGrid.Services;
 
-namespace Narya.Email.Sendgrid;
+namespace Narya.Email.SendGrid;
 
 public static class DependencyInjection
 {

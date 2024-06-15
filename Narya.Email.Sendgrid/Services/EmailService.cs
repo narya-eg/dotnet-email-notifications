@@ -2,12 +2,12 @@
 using Narya.Email.Core.Extensions;
 using Narya.Email.Core.Interfaces;
 using Narya.Email.Core.Models;
-using Narya.Email.Sendgrid.Exceptions;
-using Narya.Email.Sendgrid.Extensions;
+using Narya.Email.SendGrid.Exceptions;
+using Narya.Email.SendGrid.Extensions;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
-namespace Narya.Email.Sendgrid.Services;
+namespace Narya.Email.SendGrid.Services;
 
 public class EmailService : IEmailService
 {

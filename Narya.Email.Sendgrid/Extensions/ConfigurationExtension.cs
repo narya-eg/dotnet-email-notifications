@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Narya.Email.Core.Interfaces;
 
-namespace Narya.Email.Sendgrid.Extensions;
+namespace Narya.Email.SendGrid.Extensions;
 
 public static class ConfigurationExtension
 {

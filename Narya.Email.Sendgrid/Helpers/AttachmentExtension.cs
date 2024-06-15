@@ -1,7 +1,7 @@
 ﻿using System.Net.Mail;
 using Microsoft.AspNetCore.Http;
 
-namespace Narya.Email.Sendgrid.Helpers;
+namespace Narya.Email.SendGrid.Helpers;
 
 public static class AttachmentExtension
 {
