@@ -5,9 +5,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 
-        <PackageVersion>1.0.0-beta</PackageVersion>
+		<Version>1.0.0-beta</Version> <!-- Assembly Version -->
+		<PackageVersion>1.0.0-beta</PackageVersion> <!-- NuGet Package Version -->
         <Description>Provide a services to send Emails using SMTP provider</Description>
-        <PackageTags>Email Notifications</PackageTags>
+        <PackageTags>Narya SMTP Email Notifications</PackageTags>
         <Authors>Narya</Authors>
         <Company>Narya</Company>
         <Copyright>© Narya. All rights reserved.</Copyright>

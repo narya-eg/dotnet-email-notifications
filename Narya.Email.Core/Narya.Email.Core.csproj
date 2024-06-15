@@ -6,9 +6,10 @@
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
 
-		<PackageVersion>1.0.0-beta</PackageVersion>
+		<Version>1.0.0-beta</Version> <!-- Assembly Version -->
+		<PackageVersion>1.0.0-beta</PackageVersion> <!-- NuGet Package Version -->
 		<Description>Provide a generic way to send Emails</Description>
-		<PackageTags>Email Notifications</PackageTags>
+		<PackageTags>Narya Email Notifications</PackageTags>
 		<Authors>Narya</Authors>
 		<Company>Narya</Company>
 		<Copyright>© Narya. All rights reserved.</Copyright>
