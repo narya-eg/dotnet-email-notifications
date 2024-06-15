@@ -1,10 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narya.Email.Core", "Narya.Email.Core\Narya.Email.Core.csproj", "{72C5DB5F-02BA-4926-AE4A-80E6210944A0}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narya.Email.Core", "Narya.Email.Core\Narya.Email.Core.csproj", "{72C5DB5F-02BA-4926-AE4A-80E6210944A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narya.Email.Smtp", "Narya.Email.Smtp\Narya.Email.Smtp.csproj", "{7A54CD0E-F452-4646-9073-F059378699E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narya.Email.Smtp", "Narya.Email.Smtp\Narya.Email.Smtp.csproj", "{7A54CD0E-F452-4646-9073-F059378699E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSuite", "TestSuite\TestSuite.csproj", "{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSuite", "TestSuite\TestSuite.csproj", "{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narya.Email.SendGrid", "Narya.Email.Sendgrid\Narya.Email.SendGrid.csproj", "{9DEE43A8-C94A-423E-8794-9430220B9B31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +29,15 @@ Global
 		{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DEE43A8-C94A-423E-8794-9430220B9B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DEE43A8-C94A-423E-8794-9430220B9B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DEE43A8-C94A-423E-8794-9430220B9B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DEE43A8-C94A-423E-8794-9430220B9B31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5BAA1861-5AC4-4266-B662-9259AEF0D49C}
 	EndGlobalSection
 EndGlobal

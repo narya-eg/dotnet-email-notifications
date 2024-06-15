@@ -12,7 +12,7 @@ public class EmailOptionsBuilder
     private readonly List<EmailRecipientModel> _to;
     private string _body = "(no body)";
     private string _subject = "(no subject)";
-    private bool? _isBodyHtml = null;
+    private bool? _isBodyHtml;
 
     public EmailOptionsBuilder(params EmailRecipientModel[] to)
     {
@@ -30,6 +30,7 @@ public class EmailOptionsBuilder
         _body = body;
         return this;
     }
+
     public EmailOptionsBuilder RenderAsHtml()
     {
         _isBodyHtml = true;
