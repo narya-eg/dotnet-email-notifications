@@ -6,12 +6,12 @@
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
 
-		<PackageVersion>7.0.0</PackageVersion>
+		<PackageVersion>1.0.0-beta</PackageVersion>
 		<Description>Provide a generic way to send Emails</Description>
 		<PackageTags>Email Notifications</PackageTags>
 		<Authors>Narya</Authors>
 		<Company>Narya</Company>
-		<Copyright>© Narya Corporation. All rights reserved.</Copyright>
+		<Copyright>© Narya. All rights reserved.</Copyright>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Deterministic>true</Deterministic>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
