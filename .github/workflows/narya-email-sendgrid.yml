@@ -1,10 +1,7 @@
 name: Narya.SendGrid
 
 on:
-  workflow_run:
-    workflows: ["Narya.Core"]
-    types:
-      - completed
+  workflow_dispatch:
 
 jobs:
   publish:

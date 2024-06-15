@@ -1,10 +1,7 @@
 name: Narya.Smtp
 
 on:
-  workflow_run:
-    workflows: ["Narya.Core"]
-    types:
-      - completed
+  workflow_dispatch:
 
 jobs:
   publish:
