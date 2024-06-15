@@ -1,11 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Net;
+using System.Net.Mail;
+using Microsoft.Extensions.Configuration;
 using Narya.Email.Core.Extensions;
 using Narya.Email.Core.Interfaces;
 using Narya.Email.Core.Models;
 using Narya.Email.Smtp.Extensions;
 using Narya.Email.Smtp.Helpers;
-using System.Net;
-using System.Net.Mail;
 
 namespace Narya.Email.Smtp.Services;
 
@@ -24,6 +24,7 @@ public class EmailService : IEmailService
         _smtpConfig = _configuration.GetSmtpConfig();
         await SendEmail(options);
     }
+
     public async Task Send(EmailOptions options, dynamic configuration)
     {
         if (configuration is not object) throw new Exception("SMTP configuration is not a valid configurations.");
@@ -32,6 +33,7 @@ public class EmailService : IEmailService
     }
 
     #region Helpers
+
     private async Task SendEmail(EmailOptions options)
     {
         var mail = new MailMessage();

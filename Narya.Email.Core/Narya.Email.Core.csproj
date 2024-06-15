@@ -5,10 +5,25 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>11</LangVersion>
+
+		<PackageVersion>7.0.0</PackageVersion>
+		<Description>Provide a generic way to send Emails</Description>
+		<PackageTags>Email Notifications</PackageTags>
+		<Authors>Narya</Authors>
+		<Company>Narya</Company>
+		<Copyright>© Narya Corporation. All rights reserved.</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<Deterministic>true</Deterministic>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<CountinousIntegrationBuild>true</CountinousIntegrationBuild>
+		<DebugType>embedded</DebugType>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2"/>
     </ItemGroup>
 
 </Project>

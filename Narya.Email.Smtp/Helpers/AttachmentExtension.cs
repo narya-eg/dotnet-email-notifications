@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Net.Mail;
+﻿using System.Net.Mail;
+using Microsoft.AspNetCore.Http;
 
 namespace Narya.Email.Smtp.Helpers;
 

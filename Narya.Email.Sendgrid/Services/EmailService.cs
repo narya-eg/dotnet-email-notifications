@@ -24,12 +24,14 @@ public class EmailService : IEmailService
         _sendGridConfig = _configuration.GetSendGridConfig();
         await SendEmail(options);
     }
+
     public async Task Send(EmailOptions options, dynamic configuration)
     {
         if (configuration is not object) throw new Exception("SendGrid configuration is not a valid configurations.");
         _sendGridConfig = ModelExtension.ConvertTo<SendGridConfig>(configuration);
         await SendEmail(options);
     }
+
     private async Task SendEmail(EmailOptions options)
     {
         var client = new SendGridClient(_sendGridConfig.ApiKey);

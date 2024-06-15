@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Configuration;
 using Narya.Email.Core.Interfaces;
-using System.ComponentModel.DataAnnotations;
 
 namespace Narya.Email.Sendgrid.Extensions;
 
@@ -16,10 +16,14 @@ public static class ConfigurationExtension
 
 public class SendGridConfig : IProviderConfig
 {
-    [Required]
-    public string? ApiKey { get; set; }
+    [Required] public string? ApiKey { get; set; }
     public SendGridFromConfig? From { get; set; }
-    public bool ValidateProperty(object instance, string propertyName, object? value) => Validator.TryValidateProperty(value, new ValidationContext(instance) { MemberName = propertyName }, new List<ValidationResult>());
+
+    public bool ValidateProperty(object instance, string propertyName, object? value)
+    {
+        return Validator.TryValidateProperty(value, new ValidationContext(instance) {MemberName = propertyName},
+            new List<ValidationResult>());
+    }
 }
 
 public class SendGridFromConfig

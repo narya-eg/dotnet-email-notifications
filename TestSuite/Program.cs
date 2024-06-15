@@ -1,7 +1,7 @@
 using Narya.Email.Core;
-using Narya.Email.Core.Interfaces;
 using Narya.Email.Sendgrid;
 using Narya.Email.Smtp;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,10 +17,7 @@ builder.Services.AddSwaggerGen();
 //    return EmailProvider.Instance;
 //});
 
-builder.Services.AddEmailProvider(services =>
-{
-    return services.AddSmtpProvider().AddSendGridProvider();
-});
+builder.Services.AddEmailProvider(services => { return services.AddSmtpProvider().AddSendGridProvider(); });
 
 var app = builder.Build();
 
