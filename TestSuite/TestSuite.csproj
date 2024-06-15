@@ -11,4 +11,9 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Narya.Email.SendGrid\Narya.Email.SendGrid.csproj" />
+        <ProjectReference Include="..\Narya.Email.Smtp\Narya.Email.Smtp.csproj" />
+    </ItemGroup>
+
 </Project>

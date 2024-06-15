@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
@@ -8,7 +8,7 @@
 		<Version>1.0.0-beta</Version> <!-- Assembly Version -->
 		<PackageVersion>1.0.0-beta</PackageVersion> <!-- NuGet Package Version -->
         <Description>Provide a services to send Emails using SMTP provider</Description>
-        <PackageTags>Narya SMTP Email Notifications</PackageTags>
+        <PackageTags>Narya SendGrid Email Notifications</PackageTags>
         <Authors>Narya</Authors>
         <Company>Narya</Company>
         <Copyright>© Narya. All rights reserved.</Copyright>
@@ -28,6 +28,7 @@
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" PrivateAssets="compile"/>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" PrivateAssets="compile"/>
         <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" PrivateAssets="compile"/>
+        <PackageReference Include="SendGrid" Version="9.29.3"/>
     </ItemGroup>
 
     <ItemGroup>

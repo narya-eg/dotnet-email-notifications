@@ -5,7 +5,7 @@ namespace Narya.Email.Core.Models;
 
 public class EmailOptions
 {
-    private EmailOptions()
+    public EmailOptions()
     {
     }
 
@@ -29,14 +29,14 @@ public class EmailOptions
         IsBodyHtml = isBodyHtml ?? body.IsHtml();
     }
 
-    public List<EmailRecipientModel> To { get; private set; } = new();
-    public string Subject { get; private set; } = string.Empty;
-    public string Body { get; private set; } = string.Empty;
-    public List<EmailRecipientModel> CC { get; private set; } = new();
-    public List<EmailRecipientModel> BCC { get; private set; } = new();
-    public List<IFormFile> Attachments { get; private set; } = new();
-    public List<EmailPlaceholderModel> Placeholders { get; private set; } = new();
-    public bool IsBodyHtml { get; private set; }
+    public List<EmailRecipientModel> To { get; set; } = new();
+    public string Subject { get; set; } = string.Empty;
+    public string Body { get; set; } = string.Empty;
+    public List<EmailRecipientModel> CC { get; set; } = new();
+    public List<EmailRecipientModel> BCC { get; set; } = new();
+    public List<IFormFile> Attachments { get; set; } = new();
+    public List<EmailPlaceholderModel> Placeholders { get; set; } = new();
+    public bool IsBodyHtml { get; set; }
     public string? PlainTextContent => IsBodyHtml ? null : Body;
     public string? HtmlContent => IsBodyHtml ? Body : null;
 }
