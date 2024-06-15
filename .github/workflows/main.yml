@@ -20,10 +20,6 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
 
-    - name: Show Root Folder
-      run: |
-          ls
-
     - name: Restore dependencies
       run: dotnet restore ./
 
