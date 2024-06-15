@@ -14,10 +14,6 @@ jobs:
       - name: Set up .NET
         uses: actions/setup-dotnet@v3
 
-      - name: Show Root Folder
-        run: |
-          ls
-
       - name: Restore dependencies
         run: dotnet restore ./Narya.Email.Sendgrid/
 
