@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narya.Email.Smtp", "Narya.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSuite", "TestSuite\TestSuite.csproj", "{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narya.Email.SendGrid", "Narya.Email.Sendgrid\Narya.Email.SendGrid.csproj", "{9DEE43A8-C94A-423E-8794-9430220B9B31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Narya.Email.SendGrid", "Narya.Email.SendGrid\Narya.Email.SendGrid.csproj", "{AFDB0A7A-513A-4530-BE03-9C6226EC3586}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE377C53-20E4-4BC1-ABB7-AD8E8B7B933B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DEE43A8-C94A-423E-8794-9430220B9B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DEE43A8-C94A-423E-8794-9430220B9B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DEE43A8-C94A-423E-8794-9430220B9B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DEE43A8-C94A-423E-8794-9430220B9B31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFDB0A7A-513A-4530-BE03-9C6226EC3586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFDB0A7A-513A-4530-BE03-9C6226EC3586}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFDB0A7A-513A-4530-BE03-9C6226EC3586}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFDB0A7A-513A-4530-BE03-9C6226EC3586}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
