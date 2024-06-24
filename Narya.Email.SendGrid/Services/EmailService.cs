@@ -35,7 +35,7 @@ public class EmailService : IEmailService
             return Result.Failure("SendGrid configuration is not a valid configurations.");
         }
         Result<SendGridConfig> result = ModelExtension.ConvertTo<SendGridConfig>(configuration);
-        if (result.IsFailure) return Result.Failure(result.Error);
+        if (result.IsFailure) return Result.Failure(result.Errors);
         _sendGridConfig = result.Value;
         await SendEmail(options);
         return Result.Success();
