@@ -24,9 +24,11 @@ jobs:
         run: dotnet test ./Narya.Email.Smtp/ --no-restore --verbosity normal
 
       - name: Pack NuGet package
-        run: dotnet pack ./Narya.Email.Smtp/ --no-build --no-restore --configuration Release --output core
+        run: dotnet pack ./Narya.Email.Smtp/ --no-build --no-restore --configuration Release --output smtp
 
       - name: Publish NuGet package
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_PAT }}
-        run: dotnet nuget push "$PACKAGE" -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
+        run: |
+          cd smtp
+          dotnet nuget push "$PACKAGE" -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
