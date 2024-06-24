@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Narya.Email.Core.Builders;
 using Narya.Email.Core.Interfaces;
 using Narya.Email.Core.Models;
+using TestSuite.Models;
 
 namespace TestSuite.Controllers;
 
@@ -18,9 +20,26 @@ public class EmailController : ControllerBase
     }
 
     [HttpPost("smtp")]
-    public async Task<IActionResult> SendUsingSmtp([FromBody] EmailOptions options)
+    public async Task<IActionResult> SendUsingSmtp([FromBody] EmailOptionsModel options)
     {
-        var result = await _smtpService.Send(options);
+        var emailOptionsResult =
+            new EmailOptionsBuilder(options.To.Select(x => new EmailRecipient(x.Email, x.Name)).ToArray())
+                .WithSubject(options.Subject)
+                .WithBody(options.Body)
+                .WithCc(options.CC.Select(x => new EmailRecipient(x.Email, x.Name)).ToArray())
+                .WithBcc(options.BCC.Select(x => new EmailRecipient(x.Email, x.Name)).ToArray())
+                .WithAttachment(options.Attachments.ToArray())
+                .WithPlaceholder(options.Placeholders.Select(x => new EmailPlaceholder(x.Placeholder, x.Value))
+                    .ToArray())
+                .RenderAsHtml()
+                .Build();
+
+        if (emailOptionsResult.IsFailure)
+        {
+            return BadRequest(emailOptionsResult.Error);
+        }
+
+        var result = await _smtpService.Send(emailOptionsResult.Value);
         if (result.IsFailure)
         {
             return BadRequest(result.Error);
@@ -30,9 +49,26 @@ public class EmailController : ControllerBase
     }
 
     [HttpPost("sendgrid")]
-    public async Task<IActionResult> SendUsingSendgrid([FromBody] EmailOptions options)
+    public async Task<IActionResult> SendUsingSendgrid([FromBody] EmailOptionsModel options)
     {
-        var result = await _sendgridService.Send(options);
+        var emailOptionsResult =
+            new EmailOptionsBuilder(options.To.Select(x => new EmailRecipient(x.Email, x.Name)).ToArray())
+                .WithSubject(options.Subject)
+                .WithBody(options.Body)
+                .WithCc(options.CC.Select(x => new EmailRecipient(x.Email, x.Name)).ToArray())
+                .WithBcc(options.BCC.Select(x => new EmailRecipient(x.Email, x.Name)).ToArray())
+                .WithAttachment(options.Attachments.ToArray())
+                .WithPlaceholder(options.Placeholders.Select(x => new EmailPlaceholder(x.Placeholder, x.Value))
+                    .ToArray())
+                .RenderAsHtml()
+                .Build();
+
+        if (emailOptionsResult.IsFailure)
+        {
+            return BadRequest(emailOptionsResult.Error);
+        }
+
+        var result = await _sendgridService.Send(emailOptionsResult.Value);
         if (result.IsFailure)
         {
             return BadRequest(result.Error);
