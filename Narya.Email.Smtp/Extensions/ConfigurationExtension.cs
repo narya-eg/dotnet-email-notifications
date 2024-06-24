@@ -11,7 +11,7 @@ public static class ConfigurationExtension
     {
         var config = configuration.GetSection("Smtp").Get<SmtpConfig>();
         if (config == null) return Result<SmtpConfig>.Failure("Missing 'Smtp' configuration section from the appsettings.");
-        if (config.ValidateObject(config, out List<ValidationResult> results) is false) return Result<SmtpConfig>.Failure(string.Join(",", results.Select(x => x.ErrorMessage)));
+        if (config.ValidateObject(config, out List<ValidationResult> results) is false) return Result<SmtpConfig>.Failure(results.Select(x => x.ErrorMessage ?? "").ToList());
         return Result<SmtpConfig>.Success(config);
     }
 }
