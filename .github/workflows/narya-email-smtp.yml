@@ -1,0 +1,35 @@
+name: Narya.Smtp
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+
+      - name: Restore dependencies
+        run: dotnet restore ./Narya.Email.Smtp/
+
+      - name: Build
+        run: dotnet build ./Narya.Email.Smtp/ --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test ./Narya.Email.Smtp/ --no-restore --verbosity normal
+
+      - name: Pack NuGet package
+        run: dotnet pack ./Narya.Email.Smtp/ --no-build --no-restore --configuration Release --output smtp
+
+      - name: Publish NuGet package
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_PAT }}
+        run: |
+          cd smtp
+          PACKAGE=$(find . -name "*.nupkg" | head -n 1)
+          dotnet nuget push "$PACKAGE" -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
