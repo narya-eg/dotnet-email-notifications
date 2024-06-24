@@ -32,5 +32,5 @@ public class Result<T> : Result
     }
 
     public static Result<T> Success(T value) => new Result<T>(value, true, string.Empty);
-    public static new Result<T> Failure(string error) => new Result<T>(default(T), false, error);
+    public new static Result<T> Failure(string error) => new Result<T>(default(T)!, false, error);
 }

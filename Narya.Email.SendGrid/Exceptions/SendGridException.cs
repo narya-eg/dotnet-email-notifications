@@ -19,11 +19,11 @@ internal class SendGridException : Exception
     {
     }
 
-    private SendGridException(string message, int statusCode, string responseData,
+    private SendGridException(string message, int statusCode, string? responseData,
         Dictionary<string, IEnumerable<string>> headers) : base(message)
     {
         StatusCode = statusCode;
-        ResponseData = responseData;
+        ResponseData = responseData ?? string.Empty;
         Headers = headers;
     }
 

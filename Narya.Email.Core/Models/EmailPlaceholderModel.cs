@@ -12,6 +12,6 @@ public sealed class EmailPlaceholderModel
         Value = value;
     }
 
-    public string Placeholder { get; }
-    public string Value { get; }
+    public string Placeholder { get; } = null!;
+    public string Value { get; } = null!;
 }
