@@ -17,7 +17,7 @@ public static class ModelExtension
             var modelProperty = model.GetType().GetProperty(property.Name);
             if (modelProperty is not null) result = SetValue(config, property, modelProperty.GetValue(model));
             else result = SetValue(config, property, null);
-            if (result.IsFailure) return Result<T>.Failure(result.Error);
+            if (result.IsFailure) return Result<T>.Failure(result.Errors);
         }
 
         return Result<T>.Success(config);
