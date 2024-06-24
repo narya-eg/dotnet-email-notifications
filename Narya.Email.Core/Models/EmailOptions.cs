@@ -50,25 +50,28 @@ public class EmailOptions
         List<EmailPlaceholder> placeholders,
         bool? isBodyHtml = null)
     {
+        var errors = new List<string>();
         foreach (var item in to)
         {
             var res = item.Validate();
-            if (res.IsFailure) return Result<EmailOptions>.Failure(res.Error);
+            if (res.IsFailure) errors.AddRange(res.Errors);
         }
 
         foreach (var item in cc)
         {
             var res = item.Validate();
-            if (res.IsFailure) return Result<EmailOptions>.Failure(res.Error);
+            if (res.IsFailure) errors.AddRange(res.Errors);
         }
 
         foreach (var item in bcc)
         {
             var res = item.Validate();
-            if (res.IsFailure) return Result<EmailOptions>.Failure(res.Error);
+            if (res.IsFailure) errors.AddRange(res.Errors);
         }
 
         var emailOptions = new EmailOptions(to, subject, body, cc, bcc, attachments, placeholders, isBodyHtml);
+
+        if (errors.Any()) return Result<EmailOptions>.Failure(errors);
 
         return Result<EmailOptions>.Success(emailOptions);
     }

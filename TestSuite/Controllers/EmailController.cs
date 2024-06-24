@@ -36,7 +36,7 @@ public class EmailController : ControllerBase
 
         if (emailOptionsResult.IsFailure)
         {
-            return BadRequest(emailOptionsResult.Error);
+            return BadRequest(emailOptionsResult.Errors);
         }
 
         var result = await _smtpService.Send(emailOptionsResult.Value);
@@ -65,7 +65,7 @@ public class EmailController : ControllerBase
 
         if (emailOptionsResult.IsFailure)
         {
-            return BadRequest(emailOptionsResult.Error);
+            return BadRequest(emailOptionsResult.Errors);
         }
 
         var result = await _sendgridService.Send(emailOptionsResult.Value);
