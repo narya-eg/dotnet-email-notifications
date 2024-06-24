@@ -2,17 +2,14 @@ using System.Text.RegularExpressions;
 
 namespace Narya.Email.Core.Models;
 
-public sealed class EmailRecipientModel
+public sealed class EmailRecipient
 {
-    private EmailRecipientModel()
+    private EmailRecipient()
     {
     }
 
-    public EmailRecipientModel(string email, string? name = null)
+    public EmailRecipient(string email, string? name = null)
     {
-        if (string.IsNullOrWhiteSpace(email)) throw new ArgumentException("Recipient email can't be null or empty.");
-        if (!IsValidEmail(email)) throw new ArgumentException($"Email '{email}' is not valid email address.");
-
         Email = email;
         Name = string.IsNullOrWhiteSpace(name) ? email : name;
     }
@@ -27,5 +24,15 @@ public sealed class EmailRecipientModel
 
         // Check if the email matches the pattern
         return Regex.IsMatch(email, pattern);
+    }
+
+    internal Result Validate()
+    {
+        if (string.IsNullOrWhiteSpace(Email))
+            return Result.Failure("Recipient email can't be null or empty.");
+        if (!IsValidEmail(Email))
+            return Result.Failure($"Email '{Email}' is not valid email address.");
+
+        return Result.Success();
     }
 }

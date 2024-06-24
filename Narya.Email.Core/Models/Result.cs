@@ -8,7 +8,7 @@ public class Result
 
     protected Result(bool isSuccess, ICollection<string> errors)
     {
-        if (isSuccess && errors.Any() is false)
+        if (isSuccess && errors.Any())
             throw new InvalidOperationException();
         if (!isSuccess && errors.Any() is false)
             throw new InvalidOperationException();

@@ -1,12 +1,12 @@
 namespace Narya.Email.Core.Models;
 
-public sealed class EmailPlaceholderModel
+public sealed class EmailPlaceholder
 {
-    private EmailPlaceholderModel()
+    private EmailPlaceholder()
     {
     }
 
-    public EmailPlaceholderModel(string placeholder, string value)
+    public EmailPlaceholder(string placeholder, string value)
     {
         Placeholder = placeholder;
         Value = value;
