@@ -1,16 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.Configuration;
 using Narya.Email.Core.Interfaces;
+using Narya.Email.Core.Models;
 
 namespace Narya.Email.SendGrid.Extensions;
 
 public static class ConfigurationExtension
 {
-    public static SendGridConfig GetSendGridConfig(this IConfiguration configuration)
+    public static Result<SendGridConfig> GetSendGridConfig(this IConfiguration configuration)
     {
         var config = configuration.GetSection("SendGrid").Get<SendGridConfig>();
-        if (config == null) throw new Exception("Missing 'SendGrid' configuration section from the appsettings.");
-        return config;
+        if (config == null) return Result<SendGridConfig>.Failure("Missing 'SendGrid' configuration section from the appsettings.");
+        return Result<SendGridConfig>.Success(config);
     }
 }
 

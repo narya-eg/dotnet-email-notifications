@@ -19,17 +19,24 @@ public class EmailService : IEmailService
         _configuration = configuration;
     }
 
-    public async Task Send(EmailOptions options)
+    public async Task<Result> Send(EmailOptions options)
     {
-        _sendGridConfig = _configuration.GetSendGridConfig();
+        var result = _configuration.GetSendGridConfig();
+        if (result.IsFailure) return result;
+        _sendGridConfig = result.Value;
         await SendEmail(options);
+        return Result.Success();
     }
 
-    public async Task Send(EmailOptions options, dynamic configuration)
+    public async Task<Result> Send(EmailOptions options, dynamic configuration)
     {
-        if (configuration is not object) throw new Exception("SendGrid configuration is not a valid configurations.");
+        if (configuration is not object)
+        {
+            return Result.Failure("SendGrid configuration is not a valid configurations.");
+        }
         _sendGridConfig = ModelExtension.ConvertTo<SendGridConfig>(configuration);
         await SendEmail(options);
+        return Result.Success();
     }
 
     private async Task SendEmail(EmailOptions options)

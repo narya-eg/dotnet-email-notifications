@@ -11,8 +11,8 @@ public class EmailOptionsBuilder
     private readonly List<EmailPlaceholderModel> _placeholders = new();
     private readonly List<EmailRecipientModel> _to;
     private string _body = "(no body)";
-    private string _subject = "(no subject)";
     private bool? _isBodyHtml;
+    private string _subject = "(no subject)";
 
     public EmailOptionsBuilder(params EmailRecipientModel[] to)
     {

@@ -11,13 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddEmailProvider(provider =>
-//{
-//    builder.Services.AddSmtpProvider(provider).AddSendGridProvider(provider);
-//    return EmailProvider.Instance;
-//});
-
-builder.Services.AddEmailProvider(services => { return services.AddSmtpProvider().AddSendGridProvider(); });
+builder.Services.AddEmailProvider(services => services.AddSmtpProvider().AddSendGridProvider());
 
 var app = builder.Build();
 

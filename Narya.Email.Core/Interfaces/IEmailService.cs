@@ -9,7 +9,7 @@ public interface IEmailService
     /// </summary>
     /// <param name="options"></param>
     /// <returns></returns>
-    Task Send(EmailOptions options);
+    Task<Result> Send(EmailOptions options);
 
     /// <summary>
     ///     Send an email using the passed configuration
@@ -17,5 +17,5 @@ public interface IEmailService
     /// <param name="options"></param>
     /// <param name="configuration"></param>
     /// <returns></returns>
-    Task Send(EmailOptions options, dynamic configuration);
+    Task<Result> Send(EmailOptions options, dynamic configuration);
 }
