@@ -19,17 +19,24 @@ public class EmailService : IEmailService
         _configuration = configuration;
     }
 
-    public async Task Send(EmailOptions options)
+    public async Task<Result> Send(EmailOptions options)
     {
-        _smtpConfig = _configuration.GetSmtpConfig();
+        var result = _configuration.GetSmtpConfig();
+        if (result.IsFailure) return result;
+        _smtpConfig = result.Value;
         await SendEmail(options);
+        return Result.Success();
     }
 
-    public async Task Send(EmailOptions options, dynamic configuration)
+    public async Task<Result> Send(EmailOptions options, dynamic configuration)
     {
-        if (configuration is not object) throw new Exception("SMTP configuration is not a valid configurations.");
+        if (configuration is not object)
+        {
+            return Result.Failure("SMTP configuration is not a valid configurations.");
+        }
         _smtpConfig = ModelExtension.ConvertTo<SmtpConfig>(configuration);
         await SendEmail(options);
+        return Result.Success();
     }
 
     #region Helpers

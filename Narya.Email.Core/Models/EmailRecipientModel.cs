@@ -17,8 +17,8 @@ public sealed class EmailRecipientModel
         Name = string.IsNullOrWhiteSpace(name) ? email : name;
     }
 
-    public string Email { get; private set; }
-    public string Name { get; private set; }
+    public string Email { get; }
+    public string Name { get; }
 
     private static bool IsValidEmail(string email)
     {
