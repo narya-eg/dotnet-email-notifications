@@ -10,13 +10,14 @@ The Generic Email Sender package provides a flexible and easy-to-use solution fo
 - **Extensible**: Easily extend and customize the package to support additional email providers.
 - **Reliable**: Ensure your emails are sent reliably with robust error handling and retry mechanisms.
 
-## Getting Started
 
-### Installation
+Email NuGet Packages
+---------------------------
 
-Install the package via NuGet:
-
-```sh
-Install-Package Narya.Email.Core
-Install-Package Narya.Email.Smtp
-Install-Package Narya.Email.SendGrid
+| Package Name                                                    |   .NET   | .NET Standard | .NET Framework |
+|-----------------------------------------------------------------|:--------:|:-------------:|:--------------:|
+| **Main**                                                        
+| [Narya.Email.Core]()                                            |          |      2.1      |                |
+| **Supported Providers**                                         
+| [Narya.Email.Smtp]()                                            |   7.0    |               |                |
+| [Narya.Email.SendGrid]()                                        |   7.0    |               |                |
