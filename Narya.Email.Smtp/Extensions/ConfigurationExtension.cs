@@ -11,6 +11,7 @@ public static class ConfigurationExtension
     {
         var config = configuration.GetSection("Smtp").Get<SmtpConfig>();
         if (config == null) return Result<SmtpConfig>.Failure("Missing 'Smtp' configuration section from the appsettings.");
+        if (config.ValidateObject(config, out List<ValidationResult> results) is false) return Result<SmtpConfig>.Failure(string.Join(",", results.Select(x => x.ErrorMessage)));
         return Result<SmtpConfig>.Success(config);
     }
 }
@@ -29,6 +30,13 @@ public class SmtpConfig : IProviderConfig
     {
         return Validator.TryValidateProperty(value, new ValidationContext(instance) {MemberName = propertyName},
             new List<ValidationResult>());
+    }
+
+    public bool ValidateObject(object instance, out List<ValidationResult> validationResults)
+    {
+        validationResults = new();
+        return Validator.TryValidateObject(instance, new ValidationContext(instance),
+            validationResults);
     }
 }
 

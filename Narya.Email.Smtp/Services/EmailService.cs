@@ -34,7 +34,9 @@ public class EmailService : IEmailService
         {
             return Result.Failure("SMTP configuration is not a valid configurations.");
         }
-        _smtpConfig = ModelExtension.ConvertTo<SmtpConfig>(configuration);
+        Result<SmtpConfig> result = ModelExtension.ConvertTo<SmtpConfig>(configuration);
+        if (result.IsFailure) return Result.Failure(result.Error);
+        _smtpConfig = result.Value;
         await SendEmail(options);
         return Result.Success();
     }
