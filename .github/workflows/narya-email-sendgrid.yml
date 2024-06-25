@@ -15,20 +15,21 @@ jobs:
         uses: actions/setup-dotnet@v3
 
       - name: Restore dependencies
-        run: dotnet restore ./Narya.Email.Sendgrid/
+        run: dotnet restore ./Narya.Email.SendGrid/
 
       - name: Build
-        run: dotnet build ./Narya.Email.Sendgrid/ --no-restore --configuration Release
+        run: dotnet build ./Narya.Email.SendGrid/ --no-restore --configuration Release
 
       - name: Test
-        run: dotnet test ./Narya.Email.Sendgrid/ --no-restore --verbosity normal
+        run: dotnet test ./Narya.Email.SendGrid/ --no-restore --verbosity normal
 
       - name: Pack NuGet package
-        run: dotnet pack ./Narya.Email.Sendgrid/ --no-build --no-restore --configuration Release --output sendgrid
+        run: dotnet pack ./Narya.Email.SendGrid/ --no-build --no-restore --configuration Release --output sendgrid
 
       - name: Publish NuGet package
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_PAT }}
         run: |
           cd sendgrid
+          PACKAGE=$(find . -name "*.nupkg" | head -n 1)
           dotnet nuget push "$PACKAGE" -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json

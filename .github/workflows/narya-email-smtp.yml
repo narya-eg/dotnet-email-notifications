@@ -31,4 +31,5 @@ jobs:
           NUGET_API_KEY: ${{ secrets.NUGET_PAT }}
         run: |
           cd smtp
+          PACKAGE=$(find . -name "*.nupkg" | head -n 1)
           dotnet nuget push "$PACKAGE" -k $NUGET_API_KEY -s https://api.nuget.org/v3/index.json
