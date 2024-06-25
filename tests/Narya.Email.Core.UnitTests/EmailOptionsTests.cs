@@ -1,4 +1,5 @@
 using Narya.Email.Core.Builders;
+using Narya.Email.Core.Models;
 using Xunit;
 
 namespace Narya.Email.Core.UnitTests;
@@ -6,15 +7,15 @@ namespace Narya.Email.Core.UnitTests;
 public class EmailOptionsTests
 {
     [Fact]
-    public void TestMethod1()
+    public void EmailOptionsBuilder_ReturnsSpecificClassType()
     {
         // Arrange
-        var builder = new EmailOptionsBuilder().Build();
+        var result = new EmailOptionsBuilder().Build();
 
         // Act
         // var result = myClass.MyMethod();
 
         // Assert
-        Assert.True(true);
+        Assert.IsType<EmailOptions>(result.Value);
     }
 }
